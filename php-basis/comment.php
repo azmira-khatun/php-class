@@ -10,7 +10,11 @@
 //   $a="Azmira";
  /* $b="akter";
   echo $a .$b; 
+  
   */
+
+  var_dump(5 ** 2);
+
    
    ?> 
 </body>
