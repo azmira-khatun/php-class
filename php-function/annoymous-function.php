@@ -36,6 +36,15 @@ echo "<br>";
 
 $info=fn() =>"hello";
 echo $info();
+echo "<br>";
+
+
+$add=fn($a,$b)=>  $a+$b;
+   
+
+echo $add(2,3);
+echo "<br>";
+
 
 
 ?>
