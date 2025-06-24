@@ -9,10 +9,10 @@ $f();
 echo "<br>";
 
 // normal function
-// $v=function info(){
-//     echo "hello bamgladesh";
-// };
-// info();
+function info(){
+    echo "hello bamgladesh";
+};
+info();
 
 
 
