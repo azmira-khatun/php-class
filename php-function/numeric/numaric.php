@@ -25,6 +25,32 @@ function anum2(){
     anum2();
     echo "<br>";
     
+  
     
+
+    <h1>range function</h1>
+    <!-- array range(low, high, step) -->
+    <?php
+    $N =range(0,8);
+    var_dump($N);
+    echo "<br>";
+    echo "<br>";
+
+    foreach ($N as $M){
+        echo ("$M" .",");
+    }
+    ?>
+
+<?php
+    $S =range(0,38,4); //step respectively so it returns an array with 
+    // elements starting from 0 to 38 incremented by 3
+   
+    echo "<br>";
+    echo "<br>";
+
+    foreach ($S as $T){
+        echo ("$T" .",");
+    }
+    ?> 
 
 ?>
