@@ -8,6 +8,25 @@ function Info($num){
 Info(3);
 
 
+echo "<br>";
+function factorial($n) {
+  if ($n == 0) { // Base case: factorial of 0 is 1
+    return 1;
+  } else { // Recursive case: n * factorial(n-1)
+    return $n * factorial($n - 1);
+  }
+}
+
+echo factorial(5); // Output: 120
+echo "<br>";
+
+function display_numbers($n) {
+    if ($n > 0) {
+        display_numbers($n - 1);
+        echo $n . " ";
+    }
+}
+display_numbers(5);//5 4 3 2 1 
 
 
 
