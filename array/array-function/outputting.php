@@ -1,7 +1,8 @@
+
 <?php
-	$rowdra=array("sun","shine","sunny");
-		foreach($rowdra as $rowdra){
-			echo $rowdra;
-			echo "<br/>";
-		}
-?>ssssssssss
+    $rowdra = array("sun", "shine", "sunny");
+    foreach ($rowdra as $item) {
+        echo $item;
+        echo "<br/>";
+    }
+?>
