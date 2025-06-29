@@ -14,7 +14,7 @@ echo P;
 </form>  
 
 <?php   
-    if($_POST){
+    if( isset($_POST['submit'])){
         $fact = 1;  
         //getting value from input text box 'number'  
         $number = $_POST['number'];  
