@@ -1,38 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Prime Number Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-    <h2>Check Prime Number</h2>
+   <form method="post">
+   Enter the number:<br>;
 
-    <form method="post" action="">
-        Enter a number: <input type="number" name="num" min="1" required>
-        <input type="submit" name="submit" value="Check">
-    </form>
+    <input type="number" value="number" name="number" min=1 required>
+    <input type="submit" name="submit" value="submit">
 
-    <?php
-    if (isset($_POST['submit'])) {
-        $num = $_POST['num'];
-        $isPrime = true;
+   </form> 
 
-        if ($num <= 1) {
-            $isPrime = false;
-        } else {
-            for ($i = 2; $i <= sqrt($num); $i++) {
-                if ($num % $i == 0) {
-                    $isPrime = false;
-                    break;
-                }
-            }
-        }
+   <?php
+   if(isset($_POST['submit'])){
+    $num=$_POST['number'];
+    $isPrime=true;
+if($num == 1|| $num ==0){
+  
+   echo "$num is not a prime or composite number.<br>" ;
+   $isPrime=false;
+}else{
+    for($i=2; $i<=sqrt($num); $i++){
+        if($num%$i==0){
+            $isPrime=false;
+            break;
 
-        if ($isPrime) {
-            echo "<h3>$num is a Prime Number ✅</h3>";
-        } else {
-            echo "<h3>$num is NOT a Prime Number ❌</h3>";
         }
     }
-    ?>
+}
+if($isPrime){
+    echo "$num is a prime number<br><br>";
+}else{
+    echo "$num is not a prime number<br><br>";
+   
+}
+
+
+
+   }
+   
+   
+   
+   
+   ?>
 </body>
 </html>
