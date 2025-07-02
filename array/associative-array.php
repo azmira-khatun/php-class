@@ -1,16 +1,28 @@
-<?php
-$arr1=array("a"=>10, "b"=>20, "c"=>30, "d"=>40);
-foreach($arr1 as $k=>$v){
-    $arr2[$k]=$v*2 ."<br>;
-}
-print_r($arr2);
-echo "<br>";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associative Arrays</title>
+</head>
+<body>
+    <h4>Associative Arrays</h4>
 
-$car=array("brand"=>"Ford", "model"=>"Mustang","year"=>1999);
+        <?php
+        $person = array("name" => "GCF", "age" => 30, "city" => "New York");
+         echo $person["name"]; 
+         echo "<br>";
+         print_r( $person);
+         echo "<br>";
 
+        ?>
 
-
-
-
-
-?>
+        <?php
+        $assoc = array("x"=>51,"y"=>65,"z"=>75);
+        foreach($assoc as $w=>$z){
+            $assoc1[$w] = $z*2 ."<br>";
+        }
+        print_r( $assoc1);
+        ?>
+</body>
+</html>
