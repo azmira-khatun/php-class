@@ -13,9 +13,33 @@
     </form>
     <?php
     if(isset($_POST['submit'])){
-        $num=$_POST['num'];
+        $num=$_POST['number'];
         $isPrime=true;
-        if()
+        if($num==0 || $num==1){
+            echo "$num is not a prime or composit number";
+       
+       for($i=2;$i<=sqrt($num);$i++){
+        if($num%2==0){
+            $isPrime=false;
+            break;
+        }
+         } 
+          }
+        if($isPrime){
+                    echo "$num is a prime number ";
+    
+        }else{
+                      echo "$num is not a prime number ";
+  
+        }
+
+
+
+      
+
+
+
+
     }
     
     ?>
