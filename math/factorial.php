@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,23 @@
 </head>
 <body>
     <h2>Factorial Calculator in PHP</h2>
+=======
+<?php   
+    if( isset($_POST['submit'])){
+        $fact = 1;  
+        //getting value from input text box 'number'  
+        $number = $_POST['number'];  
+        echo "Factorial of $number:<br><br>";  
+        //start loop  
+        for ($i = 1; $i <= $number; $i++){         
+            $fact = $fact * $i;  
+            }  
+            echo $fact . "<br>";  
+    }  
+?>  
+</body>  
+</html> 
+>>>>>>> e59463fc8efbff5ec18c74508ba741ccc97037f5
 
     <form method="post" action="">
         Enter a number: <input type="number" name="num" required>
