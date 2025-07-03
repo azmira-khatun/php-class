@@ -16,8 +16,8 @@ if(isset($_POST['submit'])){
     $number=$_POST['number'];
     $fact=1;
 
-if($number<0){
-    echo "nehative number is not afactorial number";
+if($number<=0){
+    echo "negative number is not a factorial number";
 }else{
     for($i=1; $i<=$number; $i++){
         $fact*=$i;

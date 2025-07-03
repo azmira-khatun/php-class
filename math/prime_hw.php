@@ -8,7 +8,7 @@
 <body>
     <form method="post">
 Enter the number:<br>
-<input type="number" name="number" min=1 required>
+<input type="number" name="number" value="number" required>
 <input type="submit" name="submit" value="submit">
  </form>
 
@@ -16,13 +16,12 @@ Enter the number:<br>
  if(isset($_POST['submit'])){
     $num=$_POST['number'];
     $isprime=true;
-if($num==0 || $num==1){
-    echo "$num is not a prime or composite number";
-     $isprime=false;
-   
+if($num==1 || $num==0){
+    echo "<p>$num is not a prime or composite number</p>";
+    return;
 }else{
-    for($i=2; $i<=sqrt($num); $i++){
-        if($num%$i==0){
+    for($i=2; $i<=sqrt( $num); $i++){
+        if($num %$i==0){
      $isprime=false;
      break;
         }
@@ -30,9 +29,9 @@ if($num==0 || $num==1){
 }
 
 if($isprime){
-    echo "$num is a prime number";
+    echo "<p>$num is a prime number</p>";
 }else{
-      echo "$num is  not a prime number";
+    echo "<p>$num is not a prime number</p>";
   
 }
 

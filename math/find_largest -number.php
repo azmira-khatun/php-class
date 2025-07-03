@@ -21,7 +21,7 @@
 
     <?php
     // PHP code to process the form submission
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER['REQUEST_METHOD']=="POST") {
         // Retrieve the numbers from the form
         $x = $_POST['numX'];
         $y = $_POST['numY'];

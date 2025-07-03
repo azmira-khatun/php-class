@@ -1,13 +1,11 @@
 
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
     <title>Factorial Calculator</title>
 </head>
 <body>
-    <h2>Factorial Calculator in PHP</h2>
-=======
+    <h>Factorial Calculator in PHP</h>
 <?php   
     if( isset($_POST['submit'])){
         $fact = 1;  
@@ -23,7 +21,6 @@
 ?>  
 </body>  
 </html> 
->>>>>>> e59463fc8efbff5ec18c74508ba741ccc97037f5
 
     <form method="post" action="">
         Enter a number: <input type="number" name="num" required>
