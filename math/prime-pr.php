@@ -18,7 +18,7 @@
         if($num==0 || $num==1){
             echo "$num is not a prime or composit number";
            return; 
-       for($i=2;$i<=sqrt($num);$i++){
+            for($i=2;$i<=sqrt($num);$i++){
         if($num%2==0){
             $isPrime=false;
             break;
