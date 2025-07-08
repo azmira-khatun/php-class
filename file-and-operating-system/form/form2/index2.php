@@ -35,5 +35,11 @@ $student->store();
       <input type="submit" name="sub" value="submit" />
       
     </form>
+
+    <?php
+    
+    FaName::display_result();
+    
+    ?>
   </body>
 </html>
