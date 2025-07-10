@@ -27,15 +27,25 @@ echo "Input the value";
 return;
 
     }
-$std=file(self::$file_path);
 
-foreach($std as $d){
-if(!empty($d)){
-    list($id,$name,$batch)=explode("-",trim($d));
-    echo "<b>$id - $name - $batch</b><br>";
+    $std = file(self::$file_path);
+    echo "<table border='1' cellpadding='10' cellspacing='0'>";
+    echo "<tr><th>ID</th><th>Name</th><th>Batch</th></tr>";
+
+    foreach ($std as $d) {
+        if (!empty(trim($d))) {
+            list($id, $name, $batch) = explode("-", trim($d));
+            echo "<tr>";
+            echo "<td>$id</td>";
+            echo "<td>$name</td>";
+            echo "<td>$batch</td>";
+            echo "</tr>";
+        }
+    }
+
+    echo "</table>";
 }
 
-}
 
 
 
@@ -44,7 +54,29 @@ if(!empty($d)){
 
 
 
-}
+
+
+
+
+
+// $std=file(self::$file_path);
+
+// foreach($std as $d){
+// if(!empty($d)){
+//     list($id,$name,$batch)=explode("-",trim($d));
+//     echo "<b>$id - $name - $batch</b><br>";
+// }
+
+// }
+
+
+
+
+
+
+
+
+// }
 
 
 
