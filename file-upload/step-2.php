@@ -2,8 +2,8 @@
 if(isset($_POST['btnsubmit'])){
   $tmp_name=$_FILES["myfile"]["tmp_name"];
   $name=$_FILES['myfile']['name'];
-  
-	  copy($tmp_name,"image/".$name);
+ 
+	  copy($tmp_name,"images/".$name);
 	  
 }
 ?>
@@ -23,7 +23,7 @@ if(isset($_POST['btnsubmit'])){
 <?php
 if(isset($_POST['btnsubmit'])){
 
-  echo "<img src='image/$name' width='300px'>";
+  echo "<img src='images/$name' width='300px'>";
 }
 
 ?>
