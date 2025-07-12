@@ -4,10 +4,18 @@ if(isset($_POST["submit"])){
     $id=$_POST["id"];
     $name=$_POST["fn"];
     $batch=$_POST["batch"];
+ $phone=$_POST["phone"];
 
-    $student=new FormData($id,$name,$batch);
-    $student->store();
-    echo "success";
+
+
+
+    if(preg_match("/^[0-9]{11,14}$/",$phone)){
+        $student=new Student($id,$name,$phone);
+        $student->save();
+        echo "Form submit successful";
+    }else{
+        echo "Invalid phone";
+    }
 
 }
 
