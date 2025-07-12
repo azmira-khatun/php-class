@@ -26,7 +26,7 @@ if(isset($_POST['login_button'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Session</title>
-    <style>
+    <!-- <style>
         div{
             width: 200px;
             height: 160px;
@@ -40,7 +40,7 @@ if(isset($_POST['login_button'])){
             border-radius: 5px;
 
         }
-    </style>
+    </style> -->
 </head>
 <body><div>
     <form action="#" method="post">

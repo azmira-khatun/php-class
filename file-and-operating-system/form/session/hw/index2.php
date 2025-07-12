@@ -5,8 +5,9 @@ if(isset($_POST["sub"])){
     $id=$_POST["id"];
     $name=$_POST["fn"];
     $contact=$_POST["contact"];
+    $email=$_POST["email"];
 
-$student=new FaName($id,$name,$contact);
+$student=new FaName($id,$name,$contact,$email);
 $student->store();
  echo "Success!" ;
 
@@ -31,6 +32,8 @@ $student->store();
 
       Contact:<br>
       <input type="number" name="contact" /><br><br>
+      Email:<br>
+      <input type="email" name="email" /><br><br>
 
       <input type="submit" name="sub" value="submit" />
       
