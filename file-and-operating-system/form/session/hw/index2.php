@@ -5,19 +5,7 @@ if(isset($_POST["sub"])){
     $id=$_POST["id"];
     $name=$_POST["fn"];
     $contact=$_POST["contact"];
-   $email = $_POST['email'];
 
-    $email_pattern ="/^[a-zA-Z0-9#%_\-\.]+[@][a-z]+[\.][a-z]{2,3}$/";
-
-
-     echo "<br>";
-
-        if(preg_match($email_pattern,$email)){
-            echo "Email is Valid";
-        }else{
-            echo "Email is Invalid";
-
-        }
 $student=new FaName($id,$name,$contact);
 $student->store();
  echo "Success!" ;
@@ -43,9 +31,6 @@ $student->store();
 
       Contact:<br>
       <input type="number" name="contact" /><br><br>
-
-       Email:
-        <input type="text" name="email" ><br><br>
 
       <input type="submit" name="sub" value="submit" />
       
