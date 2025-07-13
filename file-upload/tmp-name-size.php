@@ -5,7 +5,7 @@ if(isset($_POST["submit"])){
     $size=$_FILES["name"]["size"];
     $type=$_FILES["name"]["type"];
     $uploadOk=1;
-    $img="images/";
+    $img="img2/";
 
     // size work start
 
@@ -17,7 +17,7 @@ if(isset($_POST["submit"])){
         echo "file upload successfull .<br>";
     }
 // type start
-if( $type!="img2/jpg" && $type!="img2/jpeg" && $type!="img2/gif" ){
+if( $type!="images/jpg" && $type!="images/jpeg" && $type!="images/gif" ){
     echo "sorry not support this condition";
     $uploadOk=0;
     }
