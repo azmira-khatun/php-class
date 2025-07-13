@@ -3,7 +3,7 @@ session_start();
 if(isset($_POST['login_button'])){
     $userId = $_POST['userId'];
     $userpass = $_POST['user_password'];
-    $fileLocation =file('data_store.txt');
+    $fileLocation =file('sore-data.txt');
 
 
     foreach($fileLocation as $data){

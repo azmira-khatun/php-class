@@ -6,7 +6,10 @@ $name=$_POST["name"];
 $gmail=$_POST["gmail"];
 $phone=$_POST["phone"];
 
-if(preg_match("/^[0-9]{11-14}$/",$phone) && preg_match("/^[a-zA-Z0-9%#_\.\-]+[@][a-z]+[\.][a-z]{2,4}$/")){
+// if(preg_match("/^[0-9]{11,14}$/",$phone) && preg_match("/^[a-zA-Z0-9%#_\.\-]+[@][a-z]+[\.][a-z]{2,3}$/")){
+
+if (preg_match("/^[0-9]{11,14}$/", $phone) && preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[\.][a-z]{2,3}$/", $gmail)) {
+
 $student=new Formdata($id,$name,$gmail,$phone);
 $student->store();
 
@@ -26,6 +29,8 @@ $student->store();
     <title>Document</title>
 </head>
 <body>
+    <a href="close.php">Close Page</a>
+
     <form method="post">
 Id:<br>
 <input type="number" name="id"><br><br>
@@ -40,9 +45,10 @@ Phone:<br>
 </form>
 
 <?php
-FormData::display-data();
+FormData::display_data();
 
 ?>
+    <a href="log-out.php">Logout</a>
 
 </body>
 </html>

@@ -29,7 +29,7 @@ function store(){
 }
 
 
-  public static function display-data(){
+  public static function display_data(){
 if(!file_exists(self::$file_path)){
 echo "input the value. <br>";
 return;
