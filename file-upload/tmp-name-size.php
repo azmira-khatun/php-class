@@ -17,7 +17,7 @@ if(isset($_POST["submit"])){
         echo "file upload successfull .<br>";
     }
 // type start
-if( $type!="jpg" && $type!="jpeg" && $type!="gif" ){
+if( $type!="img2/jpg" && $type!="img2/jpeg" && $type!="img2/gif" ){
     echo "sorry not support this condition";
     $uploadOk=0;
     }
