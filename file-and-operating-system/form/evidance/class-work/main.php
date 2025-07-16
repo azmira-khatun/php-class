@@ -1,5 +1,5 @@
 <?php
-require_once("student-form.php");
+require_once("student-form2.php");
 if(isset($_POST["submit"])){
     $id=$_POST["id"];
     $name=$_POST["name"];
