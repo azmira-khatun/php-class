@@ -1,72 +1,31 @@
 <?php
-if(isset($_POST["submit"])){
-    $tmp_nam=$_FILES["name"]["tmp_name"];
-    $name=$_FILES["name"]["name"];
-    $size=$_FILES["name"]["size"];
-    $type=$_FILES["name"]["type"];
-    $uploadOk=1;
-    $img="img2/";
+if(isset($_POST['submit'])) {
+    $file_add = $_FILES['file']['tmp_name'];
+    $file_name = $_FILES['file']['name'];
+    $file_size = $_FILES['file']['size'];
+    $file_type = $_FILES['file']['type'];
+    $img = 'img2/';
+    $kb = $file_size / 1024;
 
-if( $type!="images/jpg" && $type!="images/jpeg" && $type!="images/gif" ){
-    echo "sorry not support this condition";
-    $uploadOk=0;
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+
+    if ($kb > 400) {
+        echo "File is too large";
+    } elseif (!in_array($file_type, $allowed_types)) {
+        echo "File type not supported";
+    } else {
+        move_uploaded_file($file_add, $img . $file_name);
+        echo "<b style='color: green;font-size: 16pt;'>Upload Success!!</b>";
+
+        echo "<div style='text-align:center;margin: auto'>
+            <img src='$img/$file_name' width='300px' style='margin-top: 30px'>
+        </div>";
+
+        echo "<b>File Name:</b> $file_name<br>";
+        echo "<b>Tmp Name:</b> $file_add<br>";
+        echo "<b>File Size:</b> $file_size bytes<br>";
+        echo "<b>File Type:</b> $file_type<br>";
+        echo "<b>File Error:</b> ".$_FILES['file']['error']."<br>";
     }
-
-
-
-
-    $kb= $size/1024;
-    if($kb>400){
-        echo "file is so large";
-    }else{
-        move_uploaded_file($tmp_nam,$img.$name);
-        echo "file upload successfull .<br>";
-    }
-// type start
 }
-
-
-
-
-
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div style="width: 120px; margin: 10px auto;">
-    <form action="#" method="post" enctype="multipart/form-data">
-        <fieldset>
-    <input type="file" name="name"><br>
-    <input type="submit" name="submit" value="submit">
-
-</fieldset>
-    </form>
-
-
-<?php
-if(isset($_POST['submit'])){
-
-  echo "<img src='images/$name' width='300px'>"."<br>";
-
-  echo "Filename: " . $_FILES["name"]['name']."<br>";
-  echo "Type : " . $_FILES["name"]['type'] ."<br>";
-  echo "Size : " . $_FILES["name"]['size'] ."<br>";
-  echo "Temp name: " . $_FILES["name"]['tmp_name'] ."<br>";
-  echo "Error : " . $_FILES["name"]['error'] . "<br>";
-
-}
-
-?>
-
-
-
-    </div>
-</body>
-</html>

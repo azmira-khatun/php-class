@@ -10,11 +10,11 @@ private static $file_path="data.txt";
 
 
 
-function __construct($_id,$name,$gmail,$phone){
+function __construct($_id,$_name,$_gmail,$_phone){
     $this->id=$_id;
-    $this->name=$name;
-    $this->gmail=$gmail;
-    $this->phone=$phone;
+    $this->name=$_name;
+    $this->gmail=$_gmail;
+    $this->phone=$_phone;
 
 }
 
