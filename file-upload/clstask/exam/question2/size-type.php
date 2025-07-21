@@ -47,23 +47,13 @@ if(isset($_POST['submit'])) {
         <img src='$img/$file_name' width='300px' style='margin-top: 30px'>
       </div>";
 
-      echo "<b>File Name:</b> ".$_FILES['file']['name']."<br>";
-      echo "<b>Tmp Name:</b> ".$_FILES['file']['tmp_name']."<br>";
-      echo "<b>File Size:</b> ".$_FILES['file']['size']."<br>";
-      echo "<b>File Type:</b> ".$_FILES['file']['type']."<br>";
-      echo "<b>File Error:</b> ".$_FILES['file']['error']."<br>";
+     
     }
 
     ?>
-    </div>
+    <br>
+    <br>
+ <a href="logout.php"><button>Logout</button></a>
 
-    <?php
-    
-    <div class="button-row">
-    <a href="logout.php">Logout</a>
-
-</div>
-
-    ?>
 </body>
 </html>
