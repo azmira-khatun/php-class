@@ -10,7 +10,7 @@ private static $file_path="data.txt";
 
 
 
-function __construct($_id,$_name,$_gmail,$_phone){
+function __construct($_id,$_name,$_gmail){
     $this->id=$_id;
     $this->name=$_name;
     $this->gmail=$_gmail;
