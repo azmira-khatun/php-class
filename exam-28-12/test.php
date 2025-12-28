@@ -1,54 +1,80 @@
 <?php
-// 1. **Database Connection Parameters**
+// 1. **ডাটাবেস সংযোগ কনফিগারেশন**
 $servername = "localhost";
-$username = "root"; // <-- CHANGE THIS
-$password = ""; // <-- CHANGE THIS
-$dbname = "form"; // <-- CHANGE THIS
+$username = "root";
+$password = "";
+$dbname = "form";
 
-// 1. Database Connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Connection Failed: " . $conn->connect_error);
+    die("সংযোগ ব্যর্থ: " . $conn->connect_error);
 }
 
 // **********************************************
-//              FORM SUBMISSION LOGIC (CREATE)
+//              ফর্ম সাবমিশন লজিক (CREATE)
 // **********************************************
-$message = ""; // Variable to display status messages
+// *দ্রষ্টব্য: এই অংশটি এখন শুধুমাত্র employeeDemographics টেবিলে ডেটা সেভ করবে।
+//          EmployeeSalary-তে সেভ করার জন্য আরও লজিক প্রয়োজন, যা এই উদাহরণের বাইরে রাখা হলো।
+//          তবে, নিচের READ লজিক দুটি টেবিল থেকেই ডেটা নেবে।
+// **********************************************
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_employee'])) {
-    // 2. Data Sanitization
+    // ডেটা স্যানিটাইজেশন
     $firstName = $conn->real_escape_string($_POST['first_name']);
     $lastName = $conn->real_escape_string($_POST['last_name']);
     $gender = $conn->real_escape_string($_POST['gender']);
-    $salary = (int) $_POST['salary']; // Ensuring an integer value
+    $salary = (int) $_POST['salary'];
 
-    // 3. SQL for Data Insertion (INSERT)
-    $insert_sql = "INSERT INTO employeeDemographics (FirstName, LastName, Gender, Salary)
-                    VALUES ('$firstName', '$lastName', '$gender', $salary)";
+    // ডেটা ইনসার্ট করার SQL (শুধুমাত্র Demographics টেবিলে)
+    $insert_sql = "INSERT INTO employeeDemographics (FirstName, LastName, Gender)
+                    VALUES ('$firstName', '$lastName', '$gender')";
 
+    // এখানে সেভ করা কঠিন, কারণ Salary কলামটি EmployeeSalary টেবিলে থাকার কথা। 
+    // সহজ করার জন্য, আপাতত ধরুন Demographics টেবিলে শুধু নাম ও লিঙ্গ সেভ হচ্ছে।
+    // এই সমস্যার সমাধান করার জন্য আপনার ডাটাবেস কাঠামো ঠিক করতে হবে। 
+
+    // আপাতত, ইনসার্ট লজিক সহজ রাখা হলো।
     if ($conn->query($insert_sql) === TRUE) {
-        $message = "<div class='success-msg'>✅ Data successfully saved!</div>";
+        // ধরুন ইনসার্টের পরে EmployeeId পাওয়া গেছে
+        $new_employee_id = $conn->insert_id;
+
+        // এখন Salary টেবিলে ডেটা ইনসার্ট করা:
+        $insert_salary_sql = "INSERT INTO EmployeeSalary (EmployeeId, Salary) VALUES ($new_employee_id, $salary)";
+
+        if ($conn->query($insert_salary_sql) === TRUE) {
+            $message = "<div class='success-msg'>✅ ডেটা সফলভাবে সেভ করা হয়েছে!</div>";
+        } else {
+            $message = "<div class='error-msg'>❌ Salary ডেটা সেভ করতে ব্যর্থ: " . $conn->error . "</div>";
+        }
+
     } else {
-        $message = "<div class='error-msg'>❌ Failed to save data: " . $conn->error . "</div>";
+        $message = "<div class='error-msg'>❌ ডেটা সেভ করতে ব্যর্থ: " . $conn->error . "</div>";
     }
 }
 
+
 // **********************************************
-//             DATA RETRIEVAL LOGIC (READ)
+//      ডেটা রিট্রিভাল লজিক (READ) - JOIN সহ
 // **********************************************
+// আপনার মূল জটিল কোয়েরিটি ব্যবহার করা হচ্ছে
 $read_sql = "
     SELECT 
-        EmployeeId, 
-        FirstName, 
-        LastName, 
-        Gender, 
-        Salary
+        ED.EmployeeId, 
+        ED.FirstName, 
+        ED.LastName, 
+        ED.Gender, 
+        ES.Salary, 
+        COUNT(ED.Gender) OVER (PARTITION BY ED.Gender) AS TotalGender
     FROM 
-        employeeDemographics 
+        employeeDemographics ED
+    JOIN 
+        EmployeeSalary ES 
+    ON 
+        ED.EmployeeId = ES.EmployeeId
     ORDER BY 
-        EmployeeId DESC"; // Newest data will be displayed at the top
+        ED.EmployeeId DESC";
 
 $result = $conn->query($read_sql);
 ?>
@@ -67,7 +93,7 @@ $result = $conn->query($read_sql);
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
             background: white;
             padding: 20px;
@@ -82,7 +108,7 @@ $result = $conn->query($read_sql);
             padding-bottom: 10px;
         }
 
-        /* --- Form Styles --- */
+        /* Form Styles */
         .form-group {
             margin-bottom: 15px;
         }
@@ -116,7 +142,7 @@ $result = $conn->query($read_sql);
             background-color: #0056b3;
         }
 
-        /* --- Table Styles --- */
+        /* Table Styles */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -135,7 +161,7 @@ $result = $conn->query($read_sql);
             color: white;
         }
 
-        /* --- Message Styles --- */
+        /* Message Styles */
         .success-msg {
             color: green;
             border: 1px solid green;
@@ -160,46 +186,47 @@ $result = $conn->query($read_sql);
 
     <div class="container">
 
-        <h1>Employee Data Management</h1>
+        <h1>কর্মচারীর ডেটা ম্যানেজমেন্ট</h1>
 
-        <?php echo $message; // Display status message ?>
+        <?php echo $message; // স্ট্যাটাস বার্তা প্রদর্শন ?>
 
-        <h2>Add New Employee</h2>
+        <h2>নতুন কর্মচারী যোগ করুন</h2>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
             <div class="form-group">
-                <label for="first_name">First Name:</label>
+                <label for="first_name">ফার্স্ট নেম:</label>
                 <input type="text" id="first_name" name="first_name" required>
             </div>
 
             <div class="form-group">
-                <label for="last_name">Last Name:</label>
+                <label for="last_name">লাস্ট নেম:</label>
                 <input type="text" id="last_name" name="last_name">
             </div>
 
             <div class="form-group">
-                <label for="gender">Gender:</label>
+                <label for="gender">লিঙ্গ (Gender):</label>
                 <select id="gender" name="gender" required>
-                    <option value="">-- Select --</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="">-- নির্বাচন করুন --</option>
+                    <option value="Male">পুরুষ (Male)</option>
+                    <option value="Female">মহিলা (Female)</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="salary">Salary:</label>
+                <label for="salary">বেতন (Salary):</label>
                 <input type="number" id="salary" name="salary" required min="1000">
             </div>
 
-            <button type="submit" name="submit_employee">Save Data</button>
+            <button type="submit" name="submit_employee">ডেটা সেভ করুন</button>
         </form>
 
-        <h2 style="margin-top: 40px;">List of Saved Employees</h2>
+        <h2 style="margin-top: 40px;">সেভ করা কর্মচারীর তালিকা</h2>
 
         <?php
         if ($result && $result->num_rows > 0) {
             echo "<table>";
-            echo "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Salary</th></tr>";
+            // *** নতুন কলামটি এখানে যোগ করা হয়েছে ***
+            echo "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Salary</th><th>Total Gender Count</th></tr>";
 
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -208,14 +235,15 @@ $result = $conn->query($read_sql);
                 echo "<td>" . htmlspecialchars($row["LastName"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["Gender"]) . "</td>";
                 echo "<td>$" . number_format($row["Salary"], 0) . "</td>";
+                // *** TotalGender ডিসপ্লে করা হচ্ছে ***
+                echo "<td>" . htmlspecialchars($row["TotalGender"]) . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
         } else {
-            echo "<p>No data has been saved yet.</p>";
+            echo "<p>এখনও কোনো ডেটা সেভ করা হয়নি অথবা ডাটাবেস সংযোগে সমস্যা আছে।</p>";
         }
 
-        // 4. Close Connection
         $conn->close();
         ?>
 
