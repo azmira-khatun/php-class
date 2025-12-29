@@ -1,15 +1,18 @@
 <?php
-class Car {
+class Car
+{
     // Property
     public $color;
 
     // Constructor
-    function __construct($color){
+    function __construct($color)
+    {
         $this->color = $color;
     }
 
     // Method
-    function drive(){
+    function drive()
+    {
         echo "The $this->color car is driving";
     }
 }
